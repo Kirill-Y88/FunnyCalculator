@@ -7,7 +7,12 @@ package y88.kirill;
 class Converter {
 
     private int [] romanNumeral;
+    private String [] romanNum = new String[]{"I","V","X","L","C"};
 
+
+/**
+ * Метод для конвертации из римкой в арабскую цифру
+ * */
     public String convertToArabic(String num){
         char[] chars = num.toCharArray();
         romanNumeral = new int[chars.length];
@@ -29,7 +34,9 @@ class Converter {
         return String.valueOf(conversionToArabic(0));
     }
 
-
+/**
+ * Вспомогательный рекурсивный метод для конвертации из римкой в арабскую цифру
+ * */
     private int conversionToArabic(int i){
         if(i == romanNumeral.length - 1){
             return romanNumeral[i];
@@ -42,32 +49,38 @@ class Converter {
         }
     }
 
-    public String convertToRoman(String number){
-        String num = "";
-        switch (number){
-            case ("1"): num = "I";
-                break;
-            case ("2"): num = "II";
-                break;
-            case ("3"): num = "III";
-                break;
-            case ("4"): num = "IV";
-                break;
-            case ("5"): num = "V";
-                break;
-            case ("6"): num = "VI";
-                break;
-            case ("7"): num = "VII";
-                break;
-            case ("8"): num = "VIII";
-                break;
-            case ("9"): num = "IX";
-                break;
-            case ("10"): num = "X";
-                break;
-        }
-        return num;
-    }
 
+/**
+  * Метод для конвертации из арабской в римскую цифру
+  * */
+    public String convertToRoman(String number){
+        int digit = number.length()-1;
+        int num;
+        StringBuilder romanNumber = new StringBuilder();
+
+        for (int i = 0; i < number.length(); i++ , digit--) {
+
+           num = Integer.parseInt(String.valueOf(number.charAt(i)));
+
+            if(1 <= num && num < 4){
+                for (int j = 1; j <= num; j++) {
+                    romanNumber.append(romanNum[0 + 2 * digit]);
+                }
+            }else if(4 <= num && num < 9){
+                if(num==4){
+                    romanNumber.append(romanNum[0 + 2 * digit]).append(romanNum[1 + 2 * digit]);
+                }else {
+                    romanNumber.append(romanNum[1 + 2 * digit]);
+                    for (int j = 6; j <= num; j++) {
+                        romanNumber.append(romanNum[0 + 2 * digit]);
+                    }
+                }
+            }else if(num == 9) {
+                romanNumber.append(romanNum[0 + 2 * digit]).append(romanNum[0 + 2 * (digit+1)]);
+            }
+
+        }
+        return romanNumber.toString();
+    }
 
 }

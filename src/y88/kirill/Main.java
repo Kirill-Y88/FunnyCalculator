@@ -4,14 +4,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println(calc("1+1"));
-        System.out.println(calc("VI/III"));
-        System.out.println(calc("9*2"));
-        System.out.println(calc("9/2"));
-        System.out.println(calc("2-9"));
-        System.out.println(calc("VI-III"));
-        System.out.println(calc("II*III"));
-
 
     }
 
